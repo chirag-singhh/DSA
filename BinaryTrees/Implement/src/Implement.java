@@ -1,7 +1,7 @@
 class Node {
     int val;
     Node left;
-    Node righ;
+    Node right;
     Node(int val){
         this.val = val;
     }
@@ -11,19 +11,19 @@ public class Implement {
         if(root == null) return;
         System.out.print(root.val+" ");
         display(root.left);
-        display(root.righ);
+        display(root.right);
 
     }
 
     public  static  int size(Node root){
         if(root == null) return 0;
-        return (1+size(root.left)+size(root.righ));
+        return (1+size(root.left)+size(root.right));
     }
     public  static  int sumOfTree(Node root){
 
         if(root == null) return 0;
         int leftsum = sumOfTree(root.left);
-        int rightsum = sumOfTree(root.righ);
+        int rightsum = sumOfTree(root.right);
 
         return root.val+leftsum+rightsum;
     }
@@ -31,9 +31,27 @@ public class Implement {
 
         if(root == null) return Integer.MAX_VALUE;
         int leftmax = maxOfTree(root.left);
-        int rightmax = maxOfTree(root.righ);
+        int rightmax = maxOfTree(root.right);
 
         return Math.max(root.val,Math.max(leftmax,rightmax));
+    }
+
+    public  static  int product(Node root){
+
+        if(root == null) return 1;
+        int leftmax = product(root.left);
+        int rightmax = product(root.right);
+
+        return root.val*leftmax*rightmax;
+    }
+
+    public  static  int level(Node root){
+
+        if(root == null) return 0;
+        int leftmax = level(root.left);
+        int rightmax = level(root.right);
+
+        return 1+Math.max(leftmax,rightmax);
     }
     public static void main(String[] args) {
         Node a = new Node(3);
@@ -48,16 +66,18 @@ public class Implement {
 //             -1    1       6   9
 
         a.left = b;
-        a.righ = c;
+        a.right = c;
         b.left = d;
-        b.righ = e;
+        b.right = e;
         c.left = f;
-        c.righ = g;
+        c.right = g;
         display(a);
         System.out.println();
         System.out.println(size(a));
         System.out.println(sumOfTree(a));
         System.out.println(maxOfTree(a));
+        System.out.println(product(a));
+        System.out.println(level(a));
 
     }
 }
